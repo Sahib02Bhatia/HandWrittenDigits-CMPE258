@@ -22,7 +22,7 @@ def processImage(cap,j,Mnist_model,out):
       im2, contours, hierarchy = cv2.findContours(edges, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
       predict(contours,Mnist_model,g_img,img,j)
       out.write(img)
-      cv2.imshow('digits',img)   
+      cv2.imshow('Sahib Bhatia - 016042650',img)   
 
 def predict(contours,Mnist_model,g_img,img,j):
     
@@ -33,7 +33,7 @@ def predict(contours,Mnist_model,g_img,img,j):
             img_original = copy(img)
             crop_image = g_img[y-pad:y+h+pad, x-pad:x+w+pad]
             crop_image =crop_image/255.0
-            frame_name =  "frame_number_" + str(i)
+           # frame_name =  "frame_number_" + str(i)
           # cv2.imshow('digit', crop_image)
             try:
                 crop_image = cv2.resize(crop_image, (28,28))
@@ -87,10 +87,10 @@ def main():
             print("Unable to read camera!!!")
     
         Mnist_model = load_model('model.h5')
-        out = cv2.VideoWriter('Live_output.mp4',cv2.VideoWriter_fourcc('M','J','P','G'), 5, (256,256))
+        out = cv2.VideoWriter('Live_output.avi',cv2.VideoWriter_fourcc('M','J','P','G'), 5, (256,256))
         start_time = time.time()
     
-        while(int(time.time()-start_time) < 200):
+        while(int(time.time()-start_time) < 20):
             j=j+1
             ret, frame = cap.read()        
             if ret == True:
@@ -103,7 +103,7 @@ def main():
                     #cv2.imshow(img)
                     #cv2.imshow(img)
                     out.write(img)
-                    if cv2.waitKey(200) or 0xFF == ord('q') :
+                    if cv2.waitKey(20) & 0xFF == ord('q') :
                         break
                 except Exception as e:
                     print(str(e))
